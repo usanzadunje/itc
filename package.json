@@ -6,9 +6,13 @@
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^2.1.0",
+        "@vue/compiler-sfc": "^3.2.29",
         "axios": "^0.21",
         "path": "^0.12.7",
         "postcss": "^8.1.14",
         "vite": "^2.7.13"
+    },
+    "dependencies": {
+        "vue": "^3.2.29"
     }
 }
