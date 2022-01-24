@@ -1,3 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/**
+    --------------------------------------
+            Main stylesheet file
+    --------------------------------------
+ */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* Reset */
+@import 'tailwindcss/base';
+@import 'reset.css';
+
+/* Components */
+@import 'tailwindcss/components';
+@import 'components.css';
+
+/* Utilities */
+@import 'tailwindcss/utilities';
+@import 'utilities.css';
+
+/* Base */
+@import 'base.css';

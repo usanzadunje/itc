@@ -1,0 +1,39 @@
+/**
+    --------------------------------------
+            Basic component styling
+    --------------------------------------
+ */
+input:focus {
+    border: 1px solid #c3bcf1;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #d5d5d5;
+    width: 23px;
+    height: 23px;
+    border-radius: 7px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 500ms
+}
+
+input[type="checkbox"]:after {
+    font-family: "Font Awesome 5 Free";
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--white);
+    content: "\f00c";
+    display: none;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--primary);
+}
+
+input[type="checkbox"]:checked:after {
+    display: block;
+}

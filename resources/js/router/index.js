@@ -2,6 +2,22 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
     /* =============================================
+                Start authentication routes
+    ============================================= */
+    {
+        path: "/login",
+        name: "login",
+        component: () => import( "@/views/auth/Login.vue"),
+    },
+    {
+        path: "/test",
+        name: "test",
+        component: () => import( "@/views/Test.vue"),
+    },
+    /* =============================================
+                End authentication routes
+    ============================================= */
+    /* =============================================
                     Start unprotected
     ============================================= */
     {

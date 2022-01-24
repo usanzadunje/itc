@@ -1,0 +1,25 @@
+/**
+    -------------------------
+            Base styles
+    -------------------------
+ */
+
+:root {
+    --primary: #5139EF;
+    --white: #FFFFFF;
+    --primary-paint: #F3F5F7;
+
+    font-family: 'Poppins', sans-serif !important;
+    background-color: var(--primary-paint);
+}
+
+:disabled {
+    opacity: 0.7;
+}
+
+::selection {
+    color: white;
+    background: #5942f1;
+}
+
+

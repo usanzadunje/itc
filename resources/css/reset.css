@@ -1,0 +1,16 @@
+/**
+    --------------------------------------------------
+            Component resetting defaults styles
+    --------------------------------------------------
+ */
+
+html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus, textarea:focus, button:focus, div:focus, a:focus,
+input:active, select:active, textarea:active, button:active, div:active, a:active {
+    outline: none;
+}
