@@ -1,12 +1,14 @@
 <template>
-  <router-view/>
+  <div>
+    WELCOMEEE
+  </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'App',
+  name: 'Welcome',
   setup() {
 
 
