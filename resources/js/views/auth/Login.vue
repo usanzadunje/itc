@@ -46,12 +46,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent } from 'vue';
 
 import AuthLayout from '@/components/AuthLayout.vue';
 import AppInput   from '@/components/AppInput.vue';
 
-import { http } from '@/services/api';
+import useHttp from '@/composables/useHttp';
 
 export default defineComponent({
   name: 'Login',
@@ -61,16 +61,14 @@ export default defineComponent({
   },
   setup() {
 
-    const form = reactive({
+    const form = useHttp({
       username: null,
       password: null,
       remember: null,
     });
 
-    const login = () => {
-      http.get('/sanctum/csrf-cookie').then(response => {
-        http.post('/login', form);
-      });
+    const login = async() => {
+      await form.submit('post', '/login');
     };
 
 

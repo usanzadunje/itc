@@ -12,14 +12,24 @@ export const http = axios.create({
 */
 http.interceptors.response.use(
     (response) => {
-        return response;
+        return response.data;
     },
     function(error) {
+        const response = error.response;
         if(
-            error.response &&
-            [401, 419].includes(error.response.status)
+            response &&
+            [401, 403, 419, 429].includes(response.status)
         ) {
-            console.log('Session expired. Login.');
+            alert(response.data.message);
+            return Promise.reject({
+                message: response.data.message,
+                status: response.status,
+            });
+        }else if(
+            response &&
+            [422].includes(response.status)
+        ) {
+            return Promise.reject(response.data?.errors);
         }
 
         return Promise.reject(error);

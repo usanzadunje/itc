@@ -19,8 +19,7 @@ class FortifyServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
+    public function register() {
         //
     }
 
@@ -29,14 +28,13 @@ class FortifyServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot() {
         Fortify::createUsersUsing(CreateNewUser::class);
 
-        RateLimiter::for('login', function (Request $request) {
-            $email = (string) $request->email;
+        RateLimiter::for('login', function(Request $request) {
+            $email = (string)$request->email;
 
-            return Limit::perMinute(5)->by($email.$request->ip());
+            return Limit::perMinute(150)->by($email . $request->ip());
         });
     }
 }

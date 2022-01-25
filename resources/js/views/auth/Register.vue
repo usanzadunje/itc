@@ -7,7 +7,6 @@
             label="Email"
             type="text"
             v-model="form.email"
-            :error="form.errors.email"
             placeholder="mail@website.com"
         />
         <AppInput
@@ -15,7 +14,6 @@
             label="Password"
             type="password"
             v-model="form.password"
-            :error="form.errors.password"
             placeholder="Min. 8 characters"
             class="mt-4"
         />
@@ -24,12 +22,10 @@
             label="Confirm Password"
             type="password"
             v-model="form.password_confirmation"
-            :error="form.errors.password"
             placeholder="Confirm password"
             class="mt-4"
         />
         <button
-            :loading="form.processing"
             class="bg-primary-600 hover:bg-primary-900 w-full rounded-full mt-6 py-3 px-6 text-white font-medium"
         >
           Sign up
@@ -52,12 +48,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 
 import AuthLayout from '@/components/AuthLayout.vue';
 import AppInput   from '@/components/AppInput.vue';
 
-import { useForm } from '@composables/useForm';
 
 export default defineComponent({
   name: 'Register',
@@ -67,16 +62,14 @@ export default defineComponent({
   },
   setup() {
     /* Component properties */
-    const form = useForm({
+    const form = reactive({
       email: null,
       password: null,
       password_confirmation: null,
-      tos: false,
     });
 
     /* Event handlers */
     const register = () => {
-      form.post('/register');
     };
 
     return {
