@@ -12,6 +12,12 @@ use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
 {
+    /**
+     * Custom bindings for Fortify classes which will switch Fortify implmentation
+     * with our own.
+     *
+     * @var array|string[]
+     */
     public array $bindings = [
         \Laravel\Fortify\Http\Requests\LoginRequest::class => \App\Http\Requests\LoginRequest::class,
         \Laravel\Fortify\Contracts\LoginResponse::class => \App\Http\Responses\LoginResponse::class,

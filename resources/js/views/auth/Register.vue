@@ -6,24 +6,30 @@
             :required="true"
             label="Email"
             type="text"
-            v-model="form.email"
+            v-model="http.email"
+            :errors="http.errors.email"
             placeholder="mail@website.com"
+            @focus="http.clearError('email')"
         />
         <AppInput
             :required="true"
             label="Password"
             type="password"
-            v-model="form.password"
+            v-model="http.password"
+            :errors="http.errors.password"
             placeholder="Min. 8 characters"
             class="mt-4"
+            @focus="http.clearError('password')"
         />
         <AppInput
             :required="true"
             label="Confirm Password"
             type="password"
-            v-model="form.password_confirmation"
+            v-model="http.password_confirmation"
+            :errors="http.errors.password"
             placeholder="Confirm password"
             class="mt-4"
+            @focus="http.clearError('password')"
         />
         <button
             class="bg-primary-600 hover:bg-primary-900 w-full rounded-full mt-6 py-3 px-6 text-white font-medium"
@@ -53,6 +59,7 @@ import { defineComponent, reactive } from 'vue';
 import AuthLayout from '@/components/AuthLayout.vue';
 import AppInput   from '@/components/AppInput.vue';
 
+import useHttp from '@/composables/useHttp';
 
 export default defineComponent({
   name: 'Register',
@@ -62,19 +69,20 @@ export default defineComponent({
   },
   setup() {
     /* Component properties */
-    const form = reactive({
+    const http = useHttp({
       email: null,
       password: null,
       password_confirmation: null,
     });
 
     /* Event handlers */
-    const register = () => {
+    const register = async() => {
+      await http.post('/register');
     };
 
     return {
       /* Component properties */
-      form,
+      http,
 
       /* Event handlers */
       register,
