@@ -1,23 +1,25 @@
 <template>
   <div>
     <h1 class="text-3xl">WELCOME</h1>
+    <div v-if="!authUser">
+      <button
+          class="text-sm text-gray-700 underline"
+          @click="this.$router.push({name: 'login'})"
+      >
+        Log in
+      </button>
+
+      <button
+          class="ml-4 text-sm text-gray-700 underline"
+          @click="this.$router.push({name: 'register'})"
+      >
+        Register
+      </button>
+    </div>
+
     <button
+        v-else
         class="text-sm text-gray-700 underline"
-        @click="this.$router.push({name: 'login'})"
-    >
-      Log in
-    </button>
-
-    <button
-        class="ml-4 text-sm text-gray-700 underline"
-        @click="this.$router.push({name: 'register'})"
-    >
-      Register
-    </button>
-
-    <button
-        v-if="authUser"
-        class="ml-4 text-sm text-gray-700 underline"
         @click="logout"
     >
       Logout

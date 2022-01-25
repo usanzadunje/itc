@@ -40,7 +40,7 @@
         <div class="mt-8 font-medium">
           <p>
             Already have an account?
-            <button class="text-primary-600 font-semibold" @click="this.$router.push({name:'login'})">
+            <button class="text-primary-600 font-semibold" @click="this.$router.replace({name:'login'})">
               Sign in
             </button>
           </p>
@@ -56,6 +56,7 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { useRouter }       from 'vue-router';
 
 import AuthLayout       from '@/components/AuthLayout.vue';
 import AppInput         from '@/components/AppInput.vue';
@@ -72,6 +73,9 @@ export default defineComponent({
     AppLoadingButton,
   },
   setup() {
+    /* Globals */
+    const router = useRouter();
+
     /* Composables */
     const { authUser, setUser } = useUser();
     const http = useHttp({
@@ -82,10 +86,12 @@ export default defineComponent({
 
     /* Event handlers */
     const register = async() => {
-      await http.post('/register');
+      await http.get('/sanctum/csrf-cookie');
+      const response = await http.post('/register');
 
-      if(http.response) {
-        setUser(http.response.user);
+      if(response.user) {
+        setUser(response.user);
+        await router.replace({ name: 'welcome' });
       }
     };
 
