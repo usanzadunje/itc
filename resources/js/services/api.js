@@ -1,8 +1,10 @@
 import axios from "axios";
 
+
 // Creating axios instance for routes that are api protected
 export const http = axios.create({
-    baseURL: "localhost:3000",
+    baseURL: import.meta.env.VITE_VUE_APP_URL,
+    withCredentials: true,
 });
 
 /*
@@ -13,6 +15,13 @@ http.interceptors.response.use(
         return response;
     },
     function(error) {
+        if(
+            error.response &&
+            [401, 419].includes(error.response.status)
+        ) {
+            console.log('Session expired. Login.');
+        }
+
         return Promise.reject(error);
     },
 );

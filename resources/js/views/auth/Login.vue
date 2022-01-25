@@ -68,7 +68,9 @@ export default defineComponent({
     });
 
     const login = () => {
-      http.post('/login', form);
+      http.get('/sanctum/csrf-cookie').then(response => {
+        http.post('/login', form);
+      });
     };
 
 
