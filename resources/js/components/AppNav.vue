@@ -10,7 +10,7 @@
     </div>
 
     <div
-        v-if="!authUser"
+        v-if="!loggedIn"
         class="flex items-center gap-1"
     >
       <AppNavLink
@@ -58,7 +58,6 @@
 <script>
 import { defineComponent } from 'vue';
 
-import AppLogo    from '@/components/AppLogo.vue';
 import AppNavLink from '@/components/AppNavLink.vue';
 
 import useUser from '@/composables/useUser';
@@ -66,17 +65,16 @@ import useUser from '@/composables/useUser';
 export default defineComponent({
   name: 'AppNav',
   components: {
-    AppLogo,
     AppNavLink,
   },
   setup() {
     /* Composables */
-    const { authUser, logout } = useUser();
+    const { loggedIn, logout } = useUser();
 
 
     return {
       /* Component properties */
-      authUser,
+      loggedIn,
 
       /* Event handlers */
       logout,
