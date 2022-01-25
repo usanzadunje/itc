@@ -1,40 +1,56 @@
 <template>
-  <div class="flex justify-between">
-    <AppLogo/>
-    <div class="self-justify-end">
-      <div v-if="!authUser">
+  <div class="flex justify-between p-2">
+    <div>
+      <AppNavLink
+          :to="{name:'welcome'}"
+          class="text-2xl font-semibold"
+      >
+        <h1>ITC</h1>
+      </AppNavLink>
+    </div>
+
+    <div
+        v-if="!authUser"
+        class="flex items-center gap-1"
+    >
+      <AppNavLink
+          :to="{name:'login'}"
+          text="Sign in"
+          class="text-xl font-light"
+      />
+      <span>/</span>
+      <AppNavLink
+          :to="{name:'register'}"
+          text="Sign up"
+          class="text-xl font-light"
+      />
+    </div>
+    <div
+        v-else
+        class="flex justify-between items-center w-full"
+    >
+      <div></div>
+
+      <div class="flex items-center gap-3">
         <AppNavLink
-            :to="{name:'login'}"
-            text="Sign in"
+            :to="{name:'project.index'}"
+            text="All Projects"
             class="text-xl font-light"
         />
+        |
         <AppNavLink
-            :to="{name:'register'}"
-            text="Sign up"
+            :to="{name:'project.create'}"
+            text="Create Project"
             class="text-xl font-light"
         />
       </div>
 
-      <div v-else>
-        <button
-            class="text-sm text-gray-700 underline"
-            @click="this.$router.push({name:'project.index'})"
-        >
-          Projects
-        </button>
-        <button
-            class="text-sm text-gray-700 underline"
-            @click="this.$router.push({name:'project.create'})"
-        >
-          Create Project
-        </button>
-        <button
-            class="text-sm text-gray-700 underline"
-            @click="logout"
-        >
-          Logout
-        </button>
-      </div>
+      <button
+          class="text-xl font-light hover:text-primary-600"
+          @click="logout"
+      >
+        Logout
+      </button>
     </div>
   </div>
 </template>
@@ -48,7 +64,7 @@ import AppNavLink from '@/components/AppNavLink.vue';
 import useUser from '@/composables/useUser';
 
 export default defineComponent({
-  name: 'AppLogo',
+  name: 'AppNav',
   components: {
     AppLogo,
     AppNavLink,

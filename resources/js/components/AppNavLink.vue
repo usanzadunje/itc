@@ -4,6 +4,7 @@
       class="hover:text-primary-600"
       :class="{'text-primary-600': isActive}"
   >
+    <slot v-if="!text"></slot>
     {{ text }}
   </router-link>
 </template>
@@ -19,7 +20,7 @@ export default defineComponent({
       type: String,
     },
     to: {
-      required: true,
+      required: false,
     },
   },
   setup(props) {

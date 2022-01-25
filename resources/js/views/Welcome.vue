@@ -2,6 +2,7 @@
   <div class="flex items-center justify-center h-screen">
     <div class="flex flex-col justify-between h-full">
       <AppNav />
+
       <h1 class="text-3xl">WELCOME</h1>
       <AppLogo/>
 
@@ -20,8 +21,6 @@ import { defineComponent } from 'vue';
 
 import AppLogo from '@/components/AppLogo.vue';
 import AppNav from '@/components/AppNav.vue';
-
-import useUser from '@/composables/useUser';
 
 export default defineComponent({
   name: 'Welcome',
