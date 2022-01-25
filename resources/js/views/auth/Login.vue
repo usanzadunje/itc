@@ -78,11 +78,9 @@ export default defineComponent({
 
     /* Event handlers */
     const login = async() => {
-      await http.post('/login');
+      const response = await http.post('/login');
 
-      if(http.response) {
-        setUser(http.response.user);
-      }
+      setUser(response);
     };
 
 

@@ -29,25 +29,29 @@ export default function useHttp(payloadData = {}) {
             const payload = this.data();
 
             try {
-                httpClient.response = await http[method](url, payload);
+                const response = await http[method](url, payload);
+                httpClient.response = response;
+
+                return response;
             }catch(errors) {
                 httpClient.errors = errors;
+
+                return null;
             }finally {
                 this.processing = false;
             }
-        }
-        ,
+        },
         async get(url) {
-            await this.request('get', url);
+            return await this.request('get', url);
         },
         async post(url) {
-            await this.request('post', url);
+            return await this.request('post', url);
         },
         async patch(url) {
-            await this.request('patch', url);
+            return await this.request('patch', url);
         },
         async delete(url) {
-            await this.request('delete', url);
+            return await this.request('delete', url);
         },
         clearError(key) {
             delete this.errors[key];

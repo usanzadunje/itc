@@ -15,6 +15,18 @@
       Register
     </button>
 
+    <button
+        v-if="authUser"
+        class="ml-4 text-sm text-gray-700 underline"
+        @click="logout"
+    >
+      Logout
+    </button>
+
+    <div class="bg-blue-200">
+      {{ authUser }}
+    </div>
+
     <div class="mt-8 bg-red-300">
       <button class="ml-8 bg-blue-300" @click="this.$router.push({name: 'test'})">
         GO TO TEST
@@ -25,14 +37,22 @@
 
 <script>
 import { defineComponent } from 'vue';
-import useUser             from '@/composables/useUser';
+
+import useUser from '@/composables/useUser';
 
 export default defineComponent({
   name: 'Welcome',
   components: {},
   setup() {
+    /* Composables */
+    const { authUser, logout } = useUser();
 
     return {
+      /* Component properties */
+      authUser,
+
+      /* Event handlers */
+      logout,
     };
   },
 });

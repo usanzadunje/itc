@@ -2,6 +2,7 @@
 
 namespace App\Http\Responses;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Fortify;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class LoginResponse implements LoginResponseContract
         return $request->wantsJson()
             ? response()->json([
                 'message' => 'Successfully logged-in!',
-                'user' => $request->user()->only('id', 'name', 'email') ?: null,
+                'user' => new UserResource($request->user()),
             ], 201)
             : redirect()->intended(Fortify::redirects('login'))->with('success', 'Welcome back!');
     }

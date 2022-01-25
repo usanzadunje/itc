@@ -2,7 +2,7 @@
 
 namespace App\Http\Responses;
 
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Fortify;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ class RegisterResponse implements RegisterResponseContract
         return $request->wantsJson()
             ? response()->json([
                 'message' => 'Successfully registered!',
-                'user' => $request->user()->only('id', 'name', 'email') ?: null,
+                'user' => new UserResource($request->user()),
             ], 201)
             : redirect()->intended(Fortify::redirects('register'))->with('success', 'Successfully registered, welcome!');
     }

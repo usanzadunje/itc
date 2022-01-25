@@ -15,13 +15,19 @@ http.interceptors.response.use(
     },
     function(error) {
         const response = error.response;
+        // For Unauthenticated | Forbidden (Unauthorized) | CSRF (Session) Expired | Too many attempts
+        // just throw alert with status code and message
+        // Refactor to navigate to error page.
         if(
             response &&
             [401, 403, 419, 429].includes(response.status)
         ) {
-            // For Unauthenticated | Forbidden (Unauthorized) | CSRF (Session) Expired | Too many attempts
-            // just throw alert with status code and message
-            // Refactor to navigate to error page.
+            // '/api/auth/user' route is for fetching authenticated user so we do not want to
+            // show any errors for this route because it is just checking whether there is an user
+            // and it triggers on every page load (App.vue setup hook)
+            if(error.response.config.url === '/api/auth/user') {
+                return;
+            }
 
             alert(`${response.status} | ${response.data.message}`);
             return;

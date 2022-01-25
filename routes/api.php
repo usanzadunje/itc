@@ -11,3 +11,10 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
+
+// Route for fetching currently logged-in user
+Route::get('/auth/user', AuthController::class)->middleware(['auth:sanctum']);
