@@ -22,6 +22,14 @@ class FortifyServiceProvider extends ServiceProvider
             \Laravel\Fortify\Http\Requests\LoginRequest::class,
             \App\Http\Requests\LoginRequest::class
         );
+        $this->app->bind(
+            \Laravel\Fortify\Contracts\LoginResponse::class,
+            \App\Http\Responses\LoginResponse::class
+        );
+        $this->app->bind(
+            \Laravel\Fortify\Contracts\RegisterResponse::class,
+            \App\Http\Responses\RegisterResponse::class
+        );
     }
 
     /**
