@@ -16,8 +16,6 @@
     </button>
 
     <div class="mt-8 bg-red-300">
-      <h1>{{authUser}}</h1>
-
       <button class="ml-8 bg-blue-300" @click="this.$router.push({name: 'test'})">
         GO TO TEST
       </button>
@@ -33,10 +31,8 @@ export default defineComponent({
   name: 'Welcome',
   components: {},
   setup() {
-    const { authUser } = useUser();
 
     return {
-      authUser,
     };
   },
 });
