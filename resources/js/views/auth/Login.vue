@@ -7,7 +7,6 @@
             label="Login"
             type="text"
             v-model="form.username"
-            :error="form.errors.username"
             placeholder="Email or username"
         />
         <AppInput
@@ -15,7 +14,6 @@
             label="Password"
             type="password"
             v-model="form.password"
-            :error="form.errors.password"
             placeholder="•••••••"
             class="mt-4"
         />
@@ -48,12 +46,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 
 import AuthLayout from '@/components/AuthLayout.vue';
 import AppInput   from '@/components/AppInput.vue';
 
-import { useForm } from '@/composables/useForm';
+import { http } from '@/services/api';
 
 export default defineComponent({
   name: 'Login',
@@ -63,14 +61,14 @@ export default defineComponent({
   },
   setup() {
 
-    const form = useForm({
+    const form = reactive({
       username: null,
       password: null,
       remember: null,
     });
 
     const login = () => {
-      form.post('/login');
+      http.post('/login', form);
     };
 
 
