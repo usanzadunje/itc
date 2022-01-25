@@ -6,20 +6,22 @@
             :required="true"
             label="Login"
             type="text"
-            v-model="form.username"
-            placeholder="Email or username"
+            v-model="http.email"
+            :error="http.errors.email"
+            placeholder="web@domain.com"
         />
         <AppInput
             :required="true"
             label="Password"
             type="password"
-            v-model="form.password"
+            v-model="http.password"
+            :error="http.errors.password"
             placeholder="•••••••"
             class="mt-4"
         />
         <div class="flex justify-between items-center mt-4">
           <div class="flex">
-            <input type="checkbox" class="bg-primary-600" v-model="form.remember">
+            <input type="checkbox" class="bg-primary-600" v-model="http.remember">
             <span class="ml-2 font-medium">Remember me</span>
           </div>
         </div>
@@ -61,19 +63,19 @@ export default defineComponent({
   },
   setup() {
 
-    const form = useHttp({
-      username: null,
+    const http = useHttp({
+      email: null,
       password: null,
       remember: null,
     });
 
     const login = async() => {
-      await form.submit('post', '/login');
+      await http.post('/login');
     };
 
 
     return {
-      form,
+      http,
       login,
     };
   },
