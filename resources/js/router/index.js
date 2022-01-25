@@ -7,6 +7,9 @@ import middlewarePipeline      from "./middlewarePipeline";
 import redirectIfAuthenticated from '@/middlewares/redirectIfAuthenticated';
 import auth                    from '@/middlewares/auth';
 
+/* Layouts */
+import Layout                  from '@/components/Layout.vue';
+
 const routes = [
     /* =============================================
                   Start unprotected
@@ -58,6 +61,24 @@ const routes = [
         },
         component: () => import( "@/views/Test.vue"),
     },
+    {
+        path: '/user',
+        component: Layout,
+        meta: { middleware: [auth] },
+        children: [
+            {
+                path: "project",
+                name: "project.index",
+                component: () => import( "@/views/project/Index.vue"),
+            },
+            {
+                path: "project/create",
+                name: "project.create",
+                component: () => import( "@/views/project/Create.vue"),
+            },
+        ],
+    },
+
     /* =============================================
                 End protected routes
     ============================================= */

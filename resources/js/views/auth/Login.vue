@@ -73,7 +73,7 @@ export default defineComponent({
     const router = useRouter();
 
     /* Composables */
-    const { authUser, setUser } = useUser();
+    const { setUser } = useUser();
     const http = useHttp({
       email: null,
       password: null,
@@ -85,7 +85,7 @@ export default defineComponent({
       await http.get('/sanctum/csrf-cookie');
       const response = await http.post('/login');
 
-      if(response.user) {
+      if(response?.user) {
         setUser(response.user);
         await router.replace({ name: 'welcome' });
       }
@@ -95,7 +95,6 @@ export default defineComponent({
     return {
       /* Component properties */
       http,
-      authUser,
 
       /* Event handlers */
       login,

@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center">
     <div class="container">
-      <slot/>
+      <router-view/>
     </div>
   </div>
 </template>

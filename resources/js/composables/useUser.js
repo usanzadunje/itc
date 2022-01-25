@@ -2,7 +2,7 @@
  * Global store for user data
  */
 import { reactive, computed } from "vue";
-import { useRouter }          from 'vue-router';
+import router                 from '@/router';
 
 import useHttp from '@/composables/useHttp';
 
@@ -12,8 +12,6 @@ const state = reactive({
 });
 
 export default function useUser() {
-    const router = useRouter();
-
     // Mutations
     const setUser = (user) => {
         state.user = user;

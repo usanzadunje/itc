@@ -13,7 +13,7 @@
         <slot name="left"></slot>
       </div>
       <div class="w-full font-medium text-gray-400 mb-8">
-        <i class="far fa-copyright"></i> 2022 ProjekatC All rights reserved.
+        <i class="far fa-copyright"></i> 2022 ITC All rights reserved.
       </div>
     </div>
     <div class="hidden xl:block w-1/2">
