@@ -8,7 +8,7 @@
         ref="input"
         :id="id"
         class="border border-gray-200 rounded-full mt-2 px-6 py-2 text-primary-600 font-normal"
-        :class="{ 'border-red-400': error }"
+        :class="{ 'border-red-400': errors }"
         :type="type"
         :placeholder="placeholder"
         :value="modelValue"
@@ -16,7 +16,11 @@
         @focus="$emit('focus')"
     />
     <slot></slot>
-    <div v-if="error" class="text-red-500">{{ error }}</div>
+    <div v-if="errors" class="text-red-500">
+      <div v-for="error in errors">
+        {{ error }}
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -48,8 +52,8 @@ export default defineComponent({
     required: {
       type: Boolean,
     },
-    error: {
-      type: String,
+    errors: {
+      type: Array,
     },
     modelValue: {
       type: String,

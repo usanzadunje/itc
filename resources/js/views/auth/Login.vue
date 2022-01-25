@@ -7,17 +7,19 @@
             label="Login"
             type="text"
             v-model="http.email"
-            :error="http.errors.email"
+            :errors="http.errors.email"
             placeholder="web@domain.com"
+            @focus="http.clearError('email')"
         />
         <AppInput
             :required="true"
             label="Password"
             type="password"
             v-model="http.password"
-            :error="http.errors.password"
+            :errors="http.errors.password"
             placeholder="•••••••"
             class="mt-4"
+            @focus="http.clearError('password')"
         />
         <div class="flex justify-between items-center mt-4">
           <div class="flex">

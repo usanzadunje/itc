@@ -33,6 +33,12 @@ export default function useHttp(payloadData = {}) {
         async delete(url) {
             await this.request('delete', url);
         },
+        clearError(key) {
+            delete this.errors[key];
+        },
+        clearErrors() {
+            this.errors = {};
+        },
     });
 
     return httpClient;
