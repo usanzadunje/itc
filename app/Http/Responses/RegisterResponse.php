@@ -19,7 +19,10 @@ class RegisterResponse implements RegisterResponseContract
     public function toResponse($request): Response {
 
         return $request->wantsJson()
-            ? response()->json(['message' => 'Successfully registered!'], 201)
+            ? response()->json([
+                'message' => 'Successfully registered!',
+                'user' => $request->user()->only('id', 'name', 'email') ?: null,
+            ], 201)
             : redirect()->intended(Fortify::redirects('register'))->with('success', 'Successfully registered, welcome!');
     }
 }

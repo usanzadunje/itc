@@ -58,6 +58,7 @@ import AppInput         from '@/components/AppInput.vue';
 import AppLoadingButton from '@/components/AppLoadingButton.vue';
 
 import useHttp from '@/composables/useHttp';
+import useUser from '@/composables/useUser';
 
 export default defineComponent({
   name: 'Login',
@@ -67,20 +68,30 @@ export default defineComponent({
     AppLoadingButton,
   },
   setup() {
-
+    /* Composables */
+    const { authUser, setUser } = useUser();
     const http = useHttp({
       email: null,
       password: null,
       remember: null,
     });
 
+    /* Event handlers */
     const login = async() => {
       await http.post('/login');
+
+      if(http.response) {
+        setUser(http.response.user);
+      }
     };
 
 
     return {
+      /* Component properties */
       http,
+      authUser,
+
+      /* Event handlers */
       login,
     };
   },

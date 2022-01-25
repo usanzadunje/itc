@@ -14,17 +14,30 @@
     >
       Register
     </button>
+
+    <div class="mt-8 bg-red-300">
+      <h1>{{authUser}}</h1>
+
+      <button class="ml-8 bg-blue-300" @click="this.$router.push({name: 'test'})">
+        GO TO TEST
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
+import useUser             from '@/composables/useUser';
 
 export default defineComponent({
   name: 'Welcome',
   components: {},
   setup() {
-    return {};
+    const { authUser } = useUser();
+
+    return {
+      authUser,
+    };
   },
 });
 </script>

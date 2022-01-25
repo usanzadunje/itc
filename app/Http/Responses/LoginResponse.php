@@ -18,7 +18,10 @@ class LoginResponse implements LoginResponseContract
      */
     public function toResponse($request) {
         return $request->wantsJson()
-            ? response()->json(['message' => 'Successfully logged-in!'], 201)
+            ? response()->json([
+                'message' => 'Successfully logged-in!',
+                'user' => $request->user()->only('id', 'name', 'email') ?: null,
+            ], 201)
             : redirect()->intended(Fortify::redirects('login'))->with('success', 'Welcome back!');
     }
 }

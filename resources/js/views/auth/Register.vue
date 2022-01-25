@@ -62,6 +62,7 @@ import AppInput         from '@/components/AppInput.vue';
 import AppLoadingButton from '@/components/AppLoadingButton.vue';
 
 import useHttp from '@/composables/useHttp';
+import useUser from '@/composables/useUser';
 
 export default defineComponent({
   name: 'Register',
@@ -71,7 +72,8 @@ export default defineComponent({
     AppLoadingButton,
   },
   setup() {
-    /* Component properties */
+    /* Composables */
+    const { authUser, setUser } = useUser();
     const http = useHttp({
       email: null,
       password: null,
@@ -81,11 +83,16 @@ export default defineComponent({
     /* Event handlers */
     const register = async() => {
       await http.post('/register');
+
+      if(http.response) {
+        setUser(http.response.user);
+      }
     };
 
     return {
       /* Component properties */
       http,
+      authUser,
 
       /* Event handlers */
       register,
