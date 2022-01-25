@@ -11,6 +11,7 @@ export default function useHttp(payloadData = {}) {
     let httpClient = reactive({
         response: {},
         errors: {},
+        processing: false,
         data() {
             // Returns fresh data that could change since they were passed in function parameter payloadData
             // this reactive object will hold this new data if it has changed since then.
@@ -23,14 +24,19 @@ export default function useHttp(payloadData = {}) {
         },
         // Calls axios method depending on which one is provided.
         async request(method, url) {
+            this.processing = true;
+
             const payload = this.data();
 
             try {
                 httpClient.response = await http[method](url, payload);
             }catch(errors) {
                 httpClient.errors = errors;
+            }finally {
+                this.processing = false;
             }
-        },
+        }
+        ,
         async get(url) {
             await this.request('get', url);
         },

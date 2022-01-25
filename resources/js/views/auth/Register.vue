@@ -31,11 +31,12 @@
             class="mt-4"
             @focus="http.clearError('password')"
         />
-        <button
+        <AppLoadingButton
+            :loading="http.processing"
             class="bg-primary-600 hover:bg-primary-900 w-full rounded-full mt-6 py-3 px-6 text-white font-medium"
         >
           Sign up
-        </button>
+        </AppLoadingButton>
         <div class="mt-8 font-medium">
           <p>
             Already have an account?
@@ -53,11 +54,12 @@
   </AuthLayout>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive } from 'vue';
+<script>
+import { defineComponent } from 'vue';
 
-import AuthLayout from '@/components/AuthLayout.vue';
-import AppInput   from '@/components/AppInput.vue';
+import AuthLayout       from '@/components/AuthLayout.vue';
+import AppInput         from '@/components/AppInput.vue';
+import AppLoadingButton from '@/components/AppLoadingButton.vue';
 
 import useHttp from '@/composables/useHttp';
 
@@ -66,6 +68,7 @@ export default defineComponent({
   components: {
     AuthLayout,
     AppInput,
+    AppLoadingButton,
   },
   setup() {
     /* Component properties */

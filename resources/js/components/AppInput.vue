@@ -23,7 +23,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 
 import { v4 as uuid } from 'uuid';

@@ -27,11 +27,12 @@
             <span class="ml-2 font-medium">Remember me</span>
           </div>
         </div>
-        <button
+        <AppLoadingButton
+            :loading="http.processing"
             class="bg-primary-600 hover:bg-primary-900 w-full rounded-full mt-6 py-3 px-6 text-white font-medium"
         >
           Login
-        </button>
+        </AppLoadingButton>
         <div class="mt-8 font-medium">
           <p>
             Not registered yet?
@@ -49,11 +50,12 @@
   </AuthLayout>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 
-import AuthLayout from '@/components/AuthLayout.vue';
-import AppInput   from '@/components/AppInput.vue';
+import AuthLayout       from '@/components/AuthLayout.vue';
+import AppInput         from '@/components/AppInput.vue';
+import AppLoadingButton from '@/components/AppLoadingButton.vue';
 
 import useHttp from '@/composables/useHttp';
 
@@ -62,6 +64,7 @@ export default defineComponent({
   components: {
     AuthLayout,
     AppInput,
+    AppLoadingButton,
   },
   setup() {
 
