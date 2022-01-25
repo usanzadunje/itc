@@ -12,24 +12,19 @@ use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
 {
+    public array $bindings = [
+        \Laravel\Fortify\Http\Requests\LoginRequest::class => \App\Http\Requests\LoginRequest::class,
+        \Laravel\Fortify\Contracts\LoginResponse::class => \App\Http\Responses\LoginResponse::class,
+        \Laravel\Fortify\Contracts\RegisterResponse::class => \App\Http\Responses\RegisterResponse::class,
+    ];
+
     /**
      * Register any application services.
      *
      * @return void
      */
     public function register() {
-        $this->app->bind(
-            \Laravel\Fortify\Http\Requests\LoginRequest::class,
-            \App\Http\Requests\LoginRequest::class
-        );
-        $this->app->bind(
-            \Laravel\Fortify\Contracts\LoginResponse::class,
-            \App\Http\Responses\LoginResponse::class
-        );
-        $this->app->bind(
-            \Laravel\Fortify\Contracts\RegisterResponse::class,
-            \App\Http\Responses\RegisterResponse::class
-        );
+        //
     }
 
     /**
