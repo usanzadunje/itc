@@ -76,6 +76,11 @@ const routes = [
                 name: "project.create",
                 component: () => import( "@/views/project/Create.vue"),
             },
+            {
+                path: ":project",
+                name: "project.show",
+                component: () => import( "@/views/project/Show.vue"),
+            },
         ],
     },
 

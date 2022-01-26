@@ -14,7 +14,7 @@
           v-for="project in http.response"
           :key="project.id"
           class="relative bg-white rounded-xl h-64 w-full p-8 cursor-pointer hover:scale-95 hover:shadow-md"
-          @click=""
+          @click="$router.push({name:'project.show', params: { project: project.id }})"
       >
         <div class="flex items-start justify-between">
           <h2 class="font-light text-3xl break-all w-4/6">{{ project.name }}</h2>
@@ -70,7 +70,6 @@ import { defineComponent, onMounted } from 'vue';
 import AppModal                from '@/components/AppModal.vue';
 import ProjectStoreUpdateModal from '@/components/ProjectStoreUpdateModal.vue';
 
-import useUser  from '@/composables/useUser';
 import useHttp  from '@/composables/useHttp';
 import useModal from '@/composables/useModal';
 
@@ -85,7 +84,6 @@ export default defineComponent({
   },
   setup() {
     /* Composables */
-    const { authUser } = useUser();
     const http = useHttp();
     const { isOpen, modalData, openModal } = useModal();
 
@@ -118,7 +116,6 @@ export default defineComponent({
     return {
       /* Component properties */
       http,
-      authUser,
       isOpen,
       modalData,
 

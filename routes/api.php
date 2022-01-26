@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/auth/user', AuthController::class)->middleware(['auth:sanctum']);
 
 Route::apiResource('project', ProjectController::class)
-    ->except('show')
     ->middleware(['auth:sanctum']);
 
 Route::apiResource('time', TimeController::class)

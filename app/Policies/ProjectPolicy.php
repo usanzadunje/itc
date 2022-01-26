@@ -39,7 +39,7 @@ class ProjectPolicy
      * @return Response|bool
      */
     public function view(User $user, Project $project): Response|bool {
-        return true;
+        return $user->id === $project->user_id;
     }
 
     /**

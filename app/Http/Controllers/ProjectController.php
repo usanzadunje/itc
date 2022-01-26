@@ -21,6 +21,10 @@ class ProjectController extends Controller
         return ProjectResource::collection($projects);
     }
 
+    public function show(Project $project): ProjectResource {
+        return new ProjectResource($project->load('times'));
+    }
+
     public function store(StoreProjectRequest $request): Response {
         auth()->user()
             ->projects()
