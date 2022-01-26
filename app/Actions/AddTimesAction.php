@@ -8,9 +8,9 @@ class AddTimesAction
     private int $minutes = 0;
     private int $seconds = 0;
 
-    public function handle(array $times, $pattern = null): string {
+    public function handle(array $times): string {
         foreach($times as $time){
-            list($hours, $minutes, $seconds) = $this->getTimeParts($time, $pattern);
+            list($hours, $minutes, $seconds) = $this->getIntTimeParts($time);
 
             $this->hours += $hours;
             $this->minutes += $minutes;
@@ -34,16 +34,11 @@ class AddTimesAction
      *
      * [ hours, minutes, seconds ]
      * @param string $time
-     * @param $pattern
      * @return int[]
      */
-    public function getTimeParts(string $time, $pattern): array {
+    private function getIntTimeParts(string $time): array {
         // Stripping white spaces from left and right side
         $time = trim($time);
-
-        if($pattern === 'human') {
-            return $this->explodeHumanLikeTime($time);
-        }
 
         $timeParts = explode(':', $time);
 
@@ -51,26 +46,7 @@ class AddTimesAction
     }
 
     /**
-     * Breaks time string which is written in human like type.
-     *
-     * $hours = '120 hours';
-     * $minutes = '120 minutes';
-     * $seconds = '120 seconds';
-     *
-     * @param string $time
-     * @return int[]
-     */
-    private function explodeHumanLikeTime(string $time) {
-        $timeParts = explode(' ', $time);
-        $hours = str_replace('hours', '', $timeParts[0]);
-        $minutes = str_replace('minutes', '', $timeParts[1]);
-        $seconds = str_replace('seconds', '', $timeParts[2]);
-
-        return [(int)$hours, (int)$minutes, (int)$seconds];
-    }
-
-    /**
-     * Simple function which adds leading 0's if minutes or seconds are less than 10
+     * Simple function which adds leading 0's if hours, minutes, seconds are less than 10
      * e.g. 8 -> 08
      *
      * @param int $hours
@@ -84,6 +60,9 @@ class AddTimesAction
         }
         if($minutes < 10) {
             $minutes = "0$minutes";
+        }
+        if($hours < 10) {
+            $hours = "0$hours";
         }
 
         return "$hours:$minutes:$seconds";

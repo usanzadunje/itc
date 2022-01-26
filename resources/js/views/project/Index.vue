@@ -13,12 +13,12 @@
       <div
           v-for="project in http.response"
           :key="project.id"
-          class="bg-white rounded-xl h-60 w-full p-8 cursor-pointer hover:scale-95 hover:shadow-md"
+          class="relative bg-white rounded-xl h-64 w-full p-8 cursor-pointer hover:scale-95 hover:shadow-md"
           @click=""
       >
-        <div class="flex justify-between">
-          <h2 class="font-light text-3xl break-all">{{ project.name }}</h2>
-          <div class="flex gap-3 flex-shrink-1">
+        <div class="flex items-start justify-between">
+          <h2 class="font-light text-3xl break-all w-4/6">{{ project.name }}</h2>
+          <div class="flex justify-end gap-3 w-2/6">
             <button
                 class="text-3xl text-green-600 rounded-md hover:opacity-70"
                 @click="updateProject($event, project)"
@@ -33,10 +33,22 @@
             </button>
           </div>
         </div>
-        <div class="mt-12 font-light text-lg">
-          <p>Last entry: {{ dayjs(project.times[0].created_at).format('DD.MM.YYYY') }}</p>
-          <p class="mt-2">Time spent: {{ project.times[0].time_spent }}</p>
-          <p class="mt-2">Total: TOTAL</p>
+        <div class="absolute bottom-8 left-8 font-light text-lg">
+          <p>
+            Last entry:
+            {{
+              project.times[0]?.created_at ?
+                  dayjs(project.times[0]?.created_at).format('DD.MM.YYYY') :
+                  'N/A'
+            }}
+          </p>
+          <p class="mt-1">
+            Time spent:
+            {{
+              project.times[0]?.time_spent ?? 'N/A'
+            }}
+          </p>
+          <p class="mt-3 text-primary-600 font-medium text-xl">Total: {{ project.total_time }}</p>
         </div>
       </div>
     </div>

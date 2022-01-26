@@ -13,9 +13,7 @@ class TimeFactory extends Factory
      */
     public function definition() {
         return [
-            'hours' => $this->faker->numberBetween(1, 300),
-            'minutes' => $this->faker->numberBetween(1, 60),
-            'seconds' => $this->faker->numberBetween(1, 60),
+            'time_spent' => rand(1, 300) . ':' . rand(1, 60) . ':' . rand(1, 60),
         ];
     }
 }
