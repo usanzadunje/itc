@@ -2,16 +2,12 @@
   <div class="p-10">
     <div class="flex justify-between items-center">
       <h1 class="text-4xl">Projects</h1>
-      <AppModalButton
-          v-slot="modal"
-          text="Create new"
-          cssClass="bg-primary-600 text-white hover:bg-primary-900 px-6 py-2.5 rounded-xl font-medium"
+      <button
+          class="bg-primary-600 text-white hover:bg-primary-900 px-6 py-2.5 rounded-xl font-medium"
+          @click="openModal()"
       >
-        <ProjectCreateUpdateModal
-            :modal="modal"
-            @projectCreated="fetchProjects"
-        />
-      </AppModalButton>
+        Create new
+      </button>
     </div>
     <div class="grid grid-cols-fit gap-5 mt-6 pb-8">
       <div
@@ -22,22 +18,31 @@
         <h2 class="text-center font-light text-3xl">{{ project.name }}</h2>
       </div>
     </div>
+    <AppModal
+        :is-open="isOpen"
+        @dismiss="openModal(false)"
+    >
+      <ProjectCreateUpdateModal
+          @project-created="fetchProjects();openModal(false)"
+      />
+    </AppModal>
   </div>
 </template>
 
 <script>
 import { defineComponent, onMounted } from 'vue';
 
-import AppModalButton           from '@/components/AppModalButton.vue';
+import AppModal                 from '@/components/AppModal.vue';
 import ProjectCreateUpdateModal from '@/components/ProjectCreateUpdateModal.vue';
 
-import useUser from '@/composables/useUser';
-import useHttp from '@/composables/useHttp';
+import useUser  from '@/composables/useUser';
+import useHttp  from '@/composables/useHttp';
+import useModal from '@/composables/useModal';
 
 export default defineComponent({
   name: 'project/Index',
   components: {
-    AppModalButton,
+    AppModal,
     ProjectCreateUpdateModal,
 
   },
@@ -45,6 +50,8 @@ export default defineComponent({
     /* Composables */
     const { authUser } = useUser();
     const http = useHttp();
+    const { isOpen, openModal } = useModal();
+
 
     /* Event handlers */
     const fetchProjects = () => {
@@ -61,9 +68,11 @@ export default defineComponent({
       /* Component properties */
       http,
       authUser,
+      isOpen,
 
       /* Event handlers */
       fetchProjects,
+      openModal,
     };
   },
 });

@@ -1,53 +1,39 @@
 <template>
   <div>
-    <button
-        :class="cssClass"
-        @click="openModal()"
-    >
-      {{ text }}
-    </button>
-
     <teleport to="body">
       <div
-          v-if="isOpen"
+          v-show="isOpen"
           class="modal"
-          @click="openModal(false)"
+          @click="$emit('dismiss')"
       >
         <div @click="$event.stopPropagation()">
-          <slot :openModal="openModal"></slot>
+          <slot></slot>
         </div>
       </div>
     </teleport>
   </div>
 </template>
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'AppModalButton',
+  name: 'AppModal',
   props: {
-    text: {
-      type: String,
-    },
-    cssClass: {
-      type: String,
+    isOpen: {
+      type: Boolean,
     },
   },
+  emits: ['dismiss'],
   setup() {
     /* Component properties */
-    const isOpen = ref(false);
 
     /* Event handlers */
-    const openModal = (state = true) => {
-      isOpen.value = state;
-    };
+
 
     return {
       /* Component properties */
-      isOpen,
 
       /* Event handlers */
-      openModal,
     };
   },
 });
