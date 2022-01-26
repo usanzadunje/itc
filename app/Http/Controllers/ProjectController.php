@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProjectController extends Controller
 {
+    public function __construct() {
+        $this->authorizeResource(Project::class, 'project');
+    }
+
     public function index(): ResourceCollection {
         $projects = auth()->user()->projects;
 
