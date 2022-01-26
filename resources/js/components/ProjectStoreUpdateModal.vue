@@ -18,7 +18,7 @@
           :loading="http.processing"
           class="bg-primary-600 hover:bg-primary-900 w-full rounded-full mt-12 py-3 px-6 text-white font-medium"
       >
-        Create
+        {{ project ? 'Update' : 'Create' }}
       </AppLoadingButton>
     </form>
   </div>
@@ -30,7 +30,7 @@ import { defineComponent, toRefs } from 'vue';
 import AppInput         from '@/components/AppInput.vue';
 import AppLoadingButton from '@/components/AppLoadingButton.vue';
 
-import useHttp          from '@/composables/useHttp';
+import useHttp from '@/composables/useHttp';
 
 export default defineComponent({
   name: 'ProjectStoreUpdateModal',

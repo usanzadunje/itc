@@ -13,16 +13,24 @@
       <div
           v-for="project in http.response"
           :key="project.id"
-          class="relative bg-white rounded-xl h-60 w-full p-8 cursor-pointer hover:scale-95 hover:shadow-md"
-          @click="openModal(true, project)"
+          class="flex justify-between items-start bg-white rounded-xl h-60 w-full p-8 cursor-pointer hover:scale-95 hover:shadow-md"
+          @click=""
       >
-        <h2 class="text-center font-light text-3xl">{{ project.name }}</h2>
-        <button
-            class="absolute bottom-8 right-8 text-3xl text-red-600 rounded-md hover:opacity-70"
-            @click="destroyProject($event, project.id)"
-        >
-          <i class="fas fa-trash-alt"></i>
-        </button>
+        <h2 class="font-light text-3xl break-all">{{ project.name }}</h2>
+        <div class="flex gap-3 flex-shrink-1">
+          <button
+              class="text-3xl text-green-600 rounded-md hover:opacity-70"
+              @click="updateProject($event, project)"
+          >
+            <i class="fas fa-edit"></i>
+          </button>
+          <button
+              class="text-3xl text-red-600 rounded-md hover:opacity-70"
+              @click="destroyProject($event, project.id)"
+          >
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
       </div>
     </div>
     <AppModal
@@ -65,6 +73,11 @@ export default defineComponent({
     const fetchProjects = () => {
       http.get('/api/project');
     };
+    const updateProject = async(event, project) => {
+      event.stopPropagation();
+
+      openModal(true, project);
+    };
     const destroyProject = async(event, projectId) => {
       event.stopPropagation();
 
@@ -91,6 +104,7 @@ export default defineComponent({
       /* Event handlers */
       fetchProjects,
       openModal,
+      updateProject,
       destroyProject,
     };
   },
