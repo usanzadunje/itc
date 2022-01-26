@@ -1,7 +1,7 @@
 <template>
   <AuthLayout heading="Sign up">
     <template v-slot:left>
-      <form @submit.prevent="register">
+      <form @submit.prevent="register" class="mt-4">
         <AppInput
             :required="true"
             label="Email"

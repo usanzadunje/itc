@@ -1,7 +1,7 @@
 <template>
   <AuthLayout heading="Sign in">
     <template v-slot:left>
-      <form @submit.prevent="login">
+      <form @submit.prevent="login" class="mt-4">
         <AppInput
             :required="true"
             label="Login"
@@ -33,10 +33,13 @@
         >
           Login
         </AppLoadingButton>
-        <div class="mt-8 font-medium">
+        <div class="mt-8 font-normal">
           <p>
             Not registered yet?
-            <button class="text-primary-600 font-semibold" @click="this.$router.replace({name:'register'})">
+            <button
+                class="text-primary-600 font-semibold"
+                @click="this.$router.replace({name:'register'})"
+            >
               Create an Account
             </button>
           </p>

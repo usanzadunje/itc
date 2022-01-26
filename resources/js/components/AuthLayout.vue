@@ -8,7 +8,7 @@
         </div>
         <div class="mt-6">
           <h1 class="text-3xl font-semibold">{{ heading }}</h1>
-          <p class="mt-2 text-gray-600">Track your time!</p>
+          <p class="mt-4 text-gray-600">Track your time!</p>
         </div>
         <slot name="left"></slot>
       </div>

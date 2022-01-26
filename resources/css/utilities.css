@@ -6,3 +6,7 @@
 .error {
     border: 2px solid red;
 }
+
+.grid-cols-fit {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}

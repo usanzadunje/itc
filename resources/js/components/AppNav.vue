@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between p-2">
+  <div class="flex justify-between w-full p-6 bg-white rounded-md">
     <div>
       <AppNavLink
           :to="{name:'welcome'}"

@@ -1,7 +1,7 @@
 <template>
+  <AppNav/>
   <div class="flex justify-center">
     <div class="container">
-      <AppNav/>
       <router-view/>
     </div>
   </div>

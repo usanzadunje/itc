@@ -62,17 +62,17 @@ const routes = [
         component: () => import( "@/views/Test.vue"),
     },
     {
-        path: '/user',
+        path: '/project',
         component: Layout,
         meta: { middleware: [auth] },
         children: [
             {
-                path: "project",
+                path: "",
                 name: "project.index",
                 component: () => import( "@/views/project/Index.vue"),
             },
             {
-                path: "project/create",
+                path: "create",
                 name: "project.create",
                 component: () => import( "@/views/project/Create.vue"),
             },
