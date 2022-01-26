@@ -19,7 +19,7 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function projects(): HasMany {
+    public function times(): HasMany {
         return $this->hasMany(Time::class);
     }
 }

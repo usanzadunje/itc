@@ -11,10 +11,9 @@ class TimeFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition() {
         return [
-            //
+            'time_spent' => $this->faker->time(),
         ];
     }
 }
