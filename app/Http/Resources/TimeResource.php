@@ -14,6 +14,7 @@ class TimeResource extends JsonResource
      */
     public function toArray($request) {
         return [
+            'id' => $this->id,
             'time_spent' => $this->time_spent,
             'created_at' => $this->created_at,
         ];
