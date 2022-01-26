@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResorce;
 use App\Models\Project;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProjectController extends Controller
 {
@@ -16,8 +17,14 @@ class ProjectController extends Controller
         return ProjectResorce::collection($projects);
     }
 
-    public function store(StoreProjectRequest $request) {
-        //
+    public function store(StoreProjectRequest $request): Response {
+        auth()->user()
+            ->projects()
+            ->create($request->validated());
+
+        return response()->json([
+            'message' => 'Successfully created new project!',
+        ], 201);
     }
 
     /**

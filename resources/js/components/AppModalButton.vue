@@ -1,21 +1,24 @@
 <template>
-  <button
-      @click="openModal()"
-  >
-    {{ text }}
-  </button>
-
-  <teleport to="body">
-    <div
-        v-if="isOpen"
-        class="modal"
-        @click="openModal(false)"
+  <div>
+    <button
+        :class="cssClass"
+        @click="openModal()"
     >
-      <div @click="$event.stopPropagation()">
-        <slot @dismiss="openModal(false)"></slot>
+      {{ text }}
+    </button>
+
+    <teleport to="body">
+      <div
+          v-if="isOpen"
+          class="modal"
+          @click="openModal(false)"
+      >
+        <div @click="$event.stopPropagation()">
+          <slot :openModal="openModal"></slot>
+        </div>
       </div>
-    </div>
-  </teleport>
+    </teleport>
+  </div>
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
@@ -24,6 +27,9 @@ export default defineComponent({
   name: 'AppModalButton',
   props: {
     text: {
+      type: String,
+    },
+    cssClass: {
       type: String,
     },
   },

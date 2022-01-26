@@ -3,11 +3,13 @@
     <div class="flex justify-between items-center">
       <h1 class="text-4xl">Projects</h1>
       <AppModalButton
+          v-slot="modal"
           text="Create new"
-          class="bg-primary-600 text-white hover:bg-primary-900 px-6 py-2.5 rounded-xl font-medium"
+          cssClass="bg-primary-600 text-white hover:bg-primary-900 px-6 py-2.5 rounded-xl font-medium"
       >
         <ProjectCreateUpdateModal
-            @project-create="fetchProjects;"
+            :modal="modal"
+            @projectCreated="fetchProjects"
         />
       </AppModalButton>
     </div>

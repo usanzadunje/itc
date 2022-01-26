@@ -11,8 +11,7 @@ class StoreProjectRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,10 +20,9 @@ class StoreProjectRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            'name' => ['required']
+            'name' => ['required', 'string', 'max:150'],
         ];
     }
 }

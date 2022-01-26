@@ -32,11 +32,16 @@ import useHttp          from '@/composables/useHttp';
 
 export default defineComponent({
   name: 'ProjectCreateUpdateModal',
+  props: {
+    modal: {
+      type: Object,
+    },
+  },
   components: {
     AppInput,
     AppLoadingButton,
   },
-  emits: ['projectCreated', 'dismiss'],
+  emits: ['projectCreated'],
   setup(props, { emit }) {
     /* Composables */
     const http = useHttp({
@@ -45,11 +50,12 @@ export default defineComponent({
 
     /* Event handlers */
     const createProject = async() => {
-      const response = await http.post('/project');
+      const response = await http.post('/api/project');
 
-      if(response.message) {
+      if(response?.message) {
         emit('projectCreated', response.message);
-        emit('dismiss');
+
+        props.modal.openModal(false);
       }
     };
 
