@@ -2,10 +2,15 @@
 
 namespace App\Http\Resources;
 
+use App\Actions\AddTimesAction;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProjectResorce extends JsonResource
+class ProjectResource extends JsonResource
 {
+    public function __construct(public AddTimesAction $addTimesAction) {
+
+    }
+
     /**
      * Transform the resource into an array.
      *

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
-use App\Http\Resources\ProjectResorce;
+use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ class ProjectController extends Controller
     public function index(): ResourceCollection {
         $projects = auth()->user()->projects()->with('times')->get();
 
-        return ProjectResorce::collection($projects);
+        return ProjectResource::collection($projects);
     }
 
     public function store(StoreProjectRequest $request): Response {

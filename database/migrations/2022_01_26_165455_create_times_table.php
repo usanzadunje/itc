@@ -14,9 +14,7 @@ class CreateTimesTable extends Migration
     public function up() {
         Schema::create('times', function(Blueprint $table) {
             $table->id();
-            $table->unsignedSmallInteger('hours');
-            $table->unsignedSmallInteger('minutes');
-            $table->unsignedSmallInteger('seconds');
+            $table->string('time_spent', '30');
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

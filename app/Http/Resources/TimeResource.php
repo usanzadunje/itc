@@ -14,7 +14,7 @@ class TimeResource extends JsonResource
      */
     public function toArray($request) {
         return [
-            'time_spent' => "$this->hours:$this->minutes:$this->seconds",
+            'time_spent' => $this->time_spent,
             'created_at' => $this->created_at,
         ];
     }
