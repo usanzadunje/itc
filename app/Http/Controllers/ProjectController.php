@@ -24,11 +24,7 @@ class ProjectController extends Controller
 
         return response()->json([
             'message' => 'Successfully created new project!',
-        ], 201);
-    }
-
-    public function show(Project $project) {
-        //
+        ], Response::HTTP_CREATED);
     }
 
     public function update(UpdateProjectRequest $request, Project $project): Response {
@@ -36,7 +32,7 @@ class ProjectController extends Controller
 
         return response()->json([
             'message' => 'Successfully updated project!',
-        ], 201);
+        ], Response::HTTP_OK);
     }
 
     public function destroy(Project $project): Response {
@@ -44,6 +40,6 @@ class ProjectController extends Controller
 
         return response()->json([
             'message' => 'Successfully deleted project!',
-        ], 201);
+        ], Response::HTTP_OK);
     }
 }

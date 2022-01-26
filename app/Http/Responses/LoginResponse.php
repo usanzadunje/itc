@@ -22,7 +22,7 @@ class LoginResponse implements LoginResponseContract
             ? response()->json([
                 'message' => 'Successfully logged-in!',
                 'user' => new UserResource($request->user()),
-            ], 201)
+            ], Response::HTTP_OK)
             : redirect()->intended(Fortify::redirects('login'))->with('success', 'Welcome back!');
     }
 }

@@ -20,4 +20,6 @@ use Illuminate\Support\Facades\Route;
 // Route for fetching currently logged-in user
 Route::get('/auth/user', AuthController::class)->middleware(['auth:sanctum']);
 
-Route::apiResource('project', ProjectController::class)->middleware(['auth:sanctum']);
+Route::apiResource('project', ProjectController::class)
+    ->except('show')
+    ->middleware(['auth:sanctum']);

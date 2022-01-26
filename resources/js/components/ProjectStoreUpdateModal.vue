@@ -3,7 +3,7 @@
     <h2 class="text-xl text-medium text-center">
       {{ project ? `Edit ${project.name} ` : 'Create new ' }}project
     </h2>
-    <form @submit.prevent="createOrUpdateProject">
+    <form @submit.prevent="storeOrUpdateProject">
       <AppInput
           :required="true"
           label="Project name"
@@ -29,10 +29,11 @@ import { defineComponent, toRefs } from 'vue';
 
 import AppInput         from '@/components/AppInput.vue';
 import AppLoadingButton from '@/components/AppLoadingButton.vue';
+
 import useHttp          from '@/composables/useHttp';
 
 export default defineComponent({
-  name: 'ProjectCreateUpdateModal',
+  name: 'ProjectStoreUpdateModal',
   props: {
     project: {
       type: Object,
@@ -58,7 +59,7 @@ export default defineComponent({
     }
 
     /* Event handlers */
-    const createOrUpdateProject = async() => {
+    const storeOrUpdateProject = async() => {
       let response;
 
       if(project.value) {
@@ -77,7 +78,7 @@ export default defineComponent({
       http,
 
       /* Event handlers */
-      createOrUpdateProject,
+      storeOrUpdateProject,
     };
   },
 });

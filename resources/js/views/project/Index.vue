@@ -17,13 +17,19 @@
           @click="openModal(true, project)"
       >
         <h2 class="text-center font-light text-3xl">{{ project.name }}</h2>
+        <button
+            class="absolute bottom-8 right-8 text-3xl text-red-600 rounded-md hover:opacity-70"
+            @click="destroyProject($event, project.id)"
+        >
+          <i class="fas fa-trash-alt"></i>
+        </button>
       </div>
     </div>
     <AppModal
         :is-open="isOpen"
         @dismiss="openModal(false)"
     >
-      <ProjectCreateUpdateModal
+      <ProjectStoreUpdateModal
           :project="modalData"
           @dismiss-modal="fetchProjects();openModal(false)"
       />
@@ -34,8 +40,8 @@
 <script>
 import { defineComponent, onMounted } from 'vue';
 
-import AppModal                 from '@/components/AppModal.vue';
-import ProjectCreateUpdateModal from '@/components/ProjectCreateUpdateModal.vue';
+import AppModal                from '@/components/AppModal.vue';
+import ProjectStoreUpdateModal from '@/components/ProjectStoreUpdateModal.vue';
 
 import useUser  from '@/composables/useUser';
 import useHttp  from '@/composables/useHttp';
@@ -45,7 +51,7 @@ export default defineComponent({
   name: 'project/Index',
   components: {
     AppModal,
-    ProjectCreateUpdateModal,
+    ProjectStoreUpdateModal,
 
   },
   setup() {
@@ -58,6 +64,15 @@ export default defineComponent({
     /* Event handlers */
     const fetchProjects = () => {
       http.get('/api/project');
+    };
+    const destroyProject = async(event, projectId) => {
+      event.stopPropagation();
+
+      const response = await http.delete(`/api/project/${projectId}`);
+
+      if(response.message) {
+        fetchProjects();
+      }
     };
 
     /* Lifecycle hooks */
@@ -76,6 +91,7 @@ export default defineComponent({
       /* Event handlers */
       fetchProjects,
       openModal,
+      destroyProject,
     };
   },
 });

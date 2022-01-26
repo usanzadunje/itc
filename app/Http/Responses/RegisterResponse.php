@@ -22,7 +22,7 @@ class RegisterResponse implements RegisterResponseContract
             ? response()->json([
                 'message' => 'Successfully registered!',
                 'user' => new UserResource($request->user()),
-            ], 201)
+            ], Response::HTTP_OK)
             : redirect()->intended(Fortify::redirects('register'))->with('success', 'Successfully registered, welcome!');
     }
 }
