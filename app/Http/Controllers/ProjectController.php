@@ -27,34 +27,23 @@ class ProjectController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Project $project
-     * @return \Illuminate\Http\Response
-     */
     public function show(Project $project) {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \App\Http\Requests\UpdateProjectRequest $request
-     * @param \App\Models\Project $project
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateProjectRequest $request, Project $project) {
-        //
+    public function update(UpdateProjectRequest $request, Project $project): Response {
+        $project->update($request->validated());
+
+        return response()->json([
+            'message' => 'Successfully updated project!',
+        ], 201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Project $project
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Project $project) {
-        //
+    public function destroy(Project $project): Response {
+        $project->delete();
+
+        return response()->json([
+            'message' => 'Successfully deleted project!',
+        ], 201);
     }
 }

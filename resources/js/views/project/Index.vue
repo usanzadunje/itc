@@ -4,7 +4,7 @@
       <h1 class="text-4xl">Projects</h1>
       <button
           class="bg-primary-600 text-white hover:bg-primary-900 px-6 py-2.5 rounded-xl font-medium"
-          @click="openModal()"
+          @click="openModal(true)"
       >
         Create new
       </button>
@@ -14,6 +14,7 @@
           v-for="project in http.response"
           :key="project.id"
           class="relative bg-white rounded-xl h-60 w-full p-8 cursor-pointer hover:scale-95 hover:shadow-md"
+          @click="openModal(true, project)"
       >
         <h2 class="text-center font-light text-3xl">{{ project.name }}</h2>
       </div>
@@ -23,7 +24,8 @@
         @dismiss="openModal(false)"
     >
       <ProjectCreateUpdateModal
-          @project-created="fetchProjects();openModal(false)"
+          :project="modalData"
+          @dismiss-modal="fetchProjects();openModal(false)"
       />
     </AppModal>
   </div>
@@ -50,7 +52,7 @@ export default defineComponent({
     /* Composables */
     const { authUser } = useUser();
     const http = useHttp();
-    const { isOpen, openModal } = useModal();
+    const { isOpen, modalData, openModal } = useModal();
 
 
     /* Event handlers */
@@ -69,6 +71,7 @@ export default defineComponent({
       http,
       authUser,
       isOpen,
+      modalData,
 
       /* Event handlers */
       fetchProjects,

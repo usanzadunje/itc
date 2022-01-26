@@ -2,7 +2,7 @@
   <div>
     <teleport to="body">
       <div
-          v-show="isOpen"
+          v-if="isOpen"
           class="modal"
           @click="$emit('dismiss')"
       >
