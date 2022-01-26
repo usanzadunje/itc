@@ -26,7 +26,8 @@ export default function useHttp(payloadData = {}) {
         async request(method, url) {
             this.processing = true;
 
-            const payload = this.data();
+            const payload = ['post', 'patch'].includes(method) ?
+                this.data() : {};
 
             try {
                 const response = await http[method](url, payload);

@@ -10,23 +10,12 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return ResourceCollection
-     */
     public function index(): ResourceCollection {
         $projects = auth()->user()->projects;
 
         return ProjectResorce::collection($projects);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \App\Http\Requests\StoreProjectRequest $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreProjectRequest $request) {
         //
     }

@@ -1,6 +1,16 @@
 <template>
   <div class="p-10">
-    <h1 class="text-4xl ">Projects</h1>
+    <div class="flex justify-between items-center">
+      <h1 class="text-4xl">Projects</h1>
+      <AppModalButton
+          text="Create new"
+          class="bg-primary-600 text-white hover:bg-primary-900 px-6 py-2.5 rounded-xl font-medium"
+      >
+        <ProjectCreateUpdateModal
+            @project-create="fetchProjects;"
+        />
+      </AppModalButton>
+    </div>
     <div class="grid grid-cols-fit gap-5 mt-6 pb-8">
       <div
           v-for="project in http.response"
@@ -16,25 +26,42 @@
 <script>
 import { defineComponent, onMounted } from 'vue';
 
+import AppModalButton           from '@/components/AppModalButton.vue';
+import ProjectCreateUpdateModal from '@/components/ProjectCreateUpdateModal.vue';
+
 import useUser from '@/composables/useUser';
 import useHttp from '@/composables/useHttp';
 
 export default defineComponent({
   name: 'project/Index',
-  components: {},
+  components: {
+    AppModalButton,
+    ProjectCreateUpdateModal,
+
+  },
   setup() {
     /* Composables */
     const { authUser } = useUser();
     const http = useHttp();
 
-    onMounted(() => {
+    /* Event handlers */
+    const fetchProjects = () => {
       http.get('/api/project');
+    };
+
+    /* Lifecycle hooks */
+    onMounted(() => {
+      fetchProjects();
     });
+
 
     return {
       /* Component properties */
       http,
       authUser,
+
+      /* Event handlers */
+      fetchProjects,
     };
   },
 });
