@@ -13,7 +13,9 @@ class TimeFactory extends Factory
      */
     public function definition() {
         return [
-            'time_spent' => $this->faker->time(),
+            'hours' => $this->faker->numberBetween(1, 300),
+            'minutes' => $this->faker->numberBetween(1, 60),
+            'seconds' => $this->faker->numberBetween(1, 60),
         ];
     }
 }

@@ -11,7 +11,9 @@ class Time extends Model
     use HasFactory;
 
     protected $fillable = [
-        'time_spent',
+        'hours',
+        'minutes',
+        'seconds',
     ];
 
     public function project(): BelongsTo {

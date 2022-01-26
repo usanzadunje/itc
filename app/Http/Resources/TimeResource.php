@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProjectResorce extends JsonResource
+class TimeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,9 +14,8 @@ class ProjectResorce extends JsonResource
      */
     public function toArray($request) {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'times' => TimeResource::collection($this->whenLoaded('times')),
+            'time_spent' => "$this->hours:$this->minutes:$this->seconds",
+            'created_at' => $this->created_at,
         ];
     }
 }

@@ -20,6 +20,7 @@ class Project extends Model
     }
 
     public function times(): HasMany {
-        return $this->hasMany(Time::class);
+        return $this->hasMany(Time::class)
+            ->orderByDesc('created_at');
     }
 }

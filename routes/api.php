@@ -25,5 +25,5 @@ Route::apiResource('project', ProjectController::class)
     ->except('show')
     ->middleware(['auth:sanctum']);
 
-Route::apiResource('time', TimeController::class)
+Route::apiResource('time', TimeCotntroller::class)
     ->middleware(['auth:sanctum']);

@@ -8,79 +8,20 @@ use App\Models\Time;
 
 class TimeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+
+    public function index() {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function store(StoreTimeRequest $request) {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTimeRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTimeRequest $request)
-    {
+    public function update(UpdateTimeRequest $request, Time $time) {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Time  $time
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Time $time)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Time  $time
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Time $time)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTimeRequest  $request
-     * @param  \App\Models\Time  $time
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTimeRequest $request, Time $time)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Time  $time
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Time $time)
-    {
+    public function destroy(Time $time) {
         //
     }
 }

@@ -13,23 +13,30 @@
       <div
           v-for="project in http.response"
           :key="project.id"
-          class="flex justify-between items-start bg-white rounded-xl h-60 w-full p-8 cursor-pointer hover:scale-95 hover:shadow-md"
+          class="bg-white rounded-xl h-60 w-full p-8 cursor-pointer hover:scale-95 hover:shadow-md"
           @click=""
       >
-        <h2 class="font-light text-3xl break-all">{{ project.name }}</h2>
-        <div class="flex gap-3 flex-shrink-1">
-          <button
-              class="text-3xl text-green-600 rounded-md hover:opacity-70"
-              @click="updateProject($event, project)"
-          >
-            <i class="fas fa-edit"></i>
-          </button>
-          <button
-              class="text-3xl text-red-600 rounded-md hover:opacity-70"
-              @click="destroyProject($event, project.id)"
-          >
-            <i class="fas fa-trash-alt"></i>
-          </button>
+        <div class="flex justify-between">
+          <h2 class="font-light text-3xl break-all">{{ project.name }}</h2>
+          <div class="flex gap-3 flex-shrink-1">
+            <button
+                class="text-3xl text-green-600 rounded-md hover:opacity-70"
+                @click="updateProject($event, project)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <button
+                class="text-3xl text-red-600 rounded-md hover:opacity-70"
+                @click="destroyProject($event, project.id)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+        <div class="mt-12 font-light text-lg">
+          <p>Last entry: {{ dayjs(project.times[0].created_at).format('DD.MM.YYYY') }}</p>
+          <p class="mt-2">Time spent: {{ project.times[0].time_spent }}</p>
+          <p class="mt-2">Total: TOTAL</p>
         </div>
       </div>
     </div>
@@ -54,6 +61,8 @@ import ProjectStoreUpdateModal from '@/components/ProjectStoreUpdateModal.vue';
 import useUser  from '@/composables/useUser';
 import useHttp  from '@/composables/useHttp';
 import useModal from '@/composables/useModal';
+
+import dayjs from 'dayjs';
 
 export default defineComponent({
   name: 'project/Index',
@@ -106,6 +115,9 @@ export default defineComponent({
       openModal,
       updateProject,
       destroyProject,
+
+      /* Helpers */
+      dayjs,
     };
   },
 });
