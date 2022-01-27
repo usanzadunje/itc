@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Time;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTimeRequest extends FormRequest
@@ -22,7 +23,7 @@ class StoreTimeRequest extends FormRequest
      */
     public function rules() {
         return [
-            'time_spent' => ['required', 'string', 'max:30'],
+            'time_spent' => ['required', 'string', 'max:30', new Time],
         ];
     }
 }
