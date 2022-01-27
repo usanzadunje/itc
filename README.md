@@ -7,12 +7,13 @@
 1. Clone project `git clone https://github.com/usanzadunje/itc.git` or for SSH `git clone git@github.com:usanzadunje/itc.git`
 2. Position yourself inside root folder of this application inside terminal `cd itc`.
 3. Install dependencies `composer install` and `npm install`
-4. Make .env file and set it up `cp .env.example .env`
+4. Make .env file and set it up `cp .env.example .env`. Make sure to set DB_USER and DB_PASSWORD to any value
 5. Generate encryption key `php artisan key:generate`.
 6. Run `docker-compose up -d`.
 7. Address on which application is hosted is: http://localhost:3000/
 8. Port exposed for DB is 3310 if you need to connect it using DB client.
 9. You are ready. Application credentials are below. Seeders are run automatically.
+10. To access docker app container you can run `docker exec -it itc-app bash`
 
 ### Start application without Docker
 

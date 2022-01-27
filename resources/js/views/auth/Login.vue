@@ -80,14 +80,14 @@ export default defineComponent({
     /* Composables */
     const { setUser } = useUser();
     const http = useHttp({
-      email: null,
-      password: null,
+      email: 'admin@admin.com',
+      password: 'password',
       remember: null,
     });
 
     /* Event handlers */
     const login = async() => {
-      // await http.get('/sanctum/csrf-cookie');
+      await http.get('/sanctum/csrf-cookie');
       const response = await http.post('/login');
 
       if(response?.user) {
