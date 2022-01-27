@@ -15,6 +15,8 @@
 9. You are ready. Application credentials are below. Seeders are run automatically.
 10. To access docker app container you can run `docker exec -it itc-app bash`
 
+**NOTE**: If you are running docker on Windows(purely and not inside WSL2), container that starts npm processes will not start since it needs linux builds(this is due to npm docker image used...). You can overcome this by going into itc-app container(shown above) and run `npm run dev` comand to start npm services manually. Or just dont use Docker.
+
 ### Start application without Docker
 
 1. Clone project `git clone https://github.com/usanzadunje/itc.git` or for SSH `git clone git@github.com:usanzadunje/itc.git`
@@ -24,7 +26,8 @@
 5. Generate encryption key `php artisan key:generate`
 6. Create a database called  `itc`
 7. Run migrations and seed database `php artisan migrate --seed`
-8. You are ready. Application credentials are below.
+8. Run `php artisan serve` and `npm run dev` to start server and dev server for frontend resources.
+9. You are ready. Application credentials are below.
 
 ---
 
