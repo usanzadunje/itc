@@ -3,10 +3,13 @@
     <teleport to="body">
       <div
           v-if="isOpen"
-          class="modal"
+          class="modal cursor-pointer"
           @click="$emit('dismiss')"
       >
-        <div @click="$event.stopPropagation()">
+        <div
+            class="cursor-default"
+            @click="$event.stopPropagation()"
+        >
           <slot></slot>
         </div>
       </div>

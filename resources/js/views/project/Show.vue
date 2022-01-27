@@ -17,7 +17,7 @@
         <div
             v-for="time in project?.times"
             class="flex justify-between items-center font-light text-xl bg-white rounded-xl px-20 py-6 cursor-pointer"
-            @click=""
+            @click="updateTime(time)"
         >
           <p>
             <span class="text-primary-600 font-normal">Recorded at:</span>
@@ -36,7 +36,6 @@
           <div class="flex items-center gap-4">
             <button
                 class="text-3xl text-green-600 rounded-md hover:opacity-70"
-                @click="updateTime($event, time)"
             >
               <i class="fas fa-edit"></i>
             </button>
@@ -105,9 +104,7 @@ export default defineComponent({
 
       openModal(true, projectData);
     };
-    const updateTime = async(event, time) => {
-      event.stopPropagation();
-
+    const updateTime = async(time) => {
       const projectData = {
         id: project.value.id,
         name: project.value.name,

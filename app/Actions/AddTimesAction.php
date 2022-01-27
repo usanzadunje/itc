@@ -42,7 +42,13 @@ class AddTimesAction
 
         $timeParts = explode(':', $time);
 
-        return [(int)$timeParts[0], (int)$timeParts[1], (int)$timeParts[2]];
+        try{
+            $timeParts = [(int)$timeParts[0], (int)$timeParts[1], (int)$timeParts[2]];
+        }catch(\Exception $ex){
+            $timeParts = [0, 0, 0];
+        }
+
+        return $timeParts;
     }
 
     /**
