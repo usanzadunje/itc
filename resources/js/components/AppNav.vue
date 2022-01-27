@@ -58,7 +58,6 @@ import { defineComponent } from 'vue';
 import AppNavLink from '@/components/AppNavLink.vue';
 
 import useUser  from '@/composables/useUser';
-import useModal from '@/composables/useModal';
 
 export default defineComponent({
   name: 'AppNav',
