@@ -37,15 +37,15 @@
           <p>
             Last entry:
             {{
-              project.times[0]?.created_at ?
-                  dayjs(project.times[0]?.created_at).format('DD.MM.YYYY') :
+              project.time?.created_at ?
+                  dayjs(project.time?.created_at).format('DD.MM.YYYY') :
                   'N/A'
             }}
           </p>
           <p class="mt-1">
             Time spent:
             {{
-              project.times[0]?.time_spent ?? 'N/A'
+              project.time?.time_spent ?? 'N/A'
             }}
           </p>
           <p class="mt-3 text-primary-600 font-medium text-xl">Total: {{ project.total_time }}</p>

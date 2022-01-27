@@ -37,17 +37,9 @@
       <div class="flex items-center gap-3">
         <AppNavLink
             :to="{name:'project.index'}"
-            text="All Projects"
+            text="Projects"
             class="text-xl font-light"
         />
-        |
-        <button
-            class="text-xl font-light hover:text-primary-600"
-            :class="{'text-primary-600': isOpen}"
-            @click="openModal(true)"
-        >
-          Create Project
-        </button>
       </div>
 
       <button
@@ -58,22 +50,12 @@
       </button>
     </div>
   </div>
-  <AppModal
-      :is-open="isOpen"
-      @dismiss="openModal(false)"
-  >
-    <ProjectStoreUpdateModal
-        @dismiss-modal="openModal(false);$router.push({name:'project.index'})"
-    />
-  </AppModal>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 
-import AppNavLink              from '@/components/AppNavLink.vue';
-import AppModal                from '@/components/AppModal.vue';
-import ProjectStoreUpdateModal from '@/components/ProjectStoreUpdateModal.vue';
+import AppNavLink from '@/components/AppNavLink.vue';
 
 import useUser  from '@/composables/useUser';
 import useModal from '@/composables/useModal';
@@ -82,8 +64,6 @@ export default defineComponent({
   name: 'AppNav',
   components: {
     AppNavLink,
-    AppModal,
-    ProjectStoreUpdateModal,
   },
   props: {
     cssClass: {
@@ -93,16 +73,13 @@ export default defineComponent({
   setup() {
     /* Composables */
     const { loggedIn, logout } = useUser();
-    const { isOpen, openModal } = useModal();
 
     return {
       /* Component properties */
       loggedIn,
-      isOpen,
 
       /* Event handlers */
       logout,
-      openModal,
     };
   },
 });

@@ -29,6 +29,9 @@ export default defineComponent({
 
     /* Component properties */
     const isActive = computed(() => {
+      console.log(props.to);
+      console.log(route.path);
+      console.log(route.name);
       if(typeof props.to === 'string') {
         return props.to == route.path;
       }else {
