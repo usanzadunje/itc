@@ -32,7 +32,7 @@ class TimeController extends Controller
     }
 
     public function destroy(Project $project, Time $time): Response {
-        $project->times()->delete($time);
+        $time->delete();
 
         return response()->json([
             'message' => 'Successfully removed project time!',

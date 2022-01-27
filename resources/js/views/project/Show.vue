@@ -94,7 +94,7 @@ export default defineComponent({
     const destroyTime = async(event, timeId) => {
       event.stopPropagation();
 
-      const response = await http.delete(`/api/time/${timeId}`);
+      const response = await http.delete(`/api/project/${project.value.id}/time/${timeId}`);
 
       if(response.message) {
         await fetchProject();
