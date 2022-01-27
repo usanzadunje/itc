@@ -90,7 +90,7 @@ export default defineComponent({
 
     /* Event handlers */
     const fetchProjects = () => {
-      http.get('/api/project');
+      http.get('/api/project?latestTime=true');
     };
     const updateProject = async(event, project) => {
       event.stopPropagation();

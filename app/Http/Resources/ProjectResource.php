@@ -15,11 +15,18 @@ class ProjectResource extends JsonResource
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request) {
+        $requestsOnlyLatestTime = $request->query('latestTime', false);
+
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'time' => new TimeResource($this->whenLoaded('latestTime')),
-            'times' => TimeResource::collection($this->whenLoaded('times')),
+            $requestsOnlyLatestTime ? 'time' : 'times' => $this->whenLoaded('times', function() use ($requestsOnlyLatestTime) {
+                if($requestsOnlyLatestTime) {
+                    return new TimeResource($this->times[0]);
+                }else {
+                    return TimeResource::collection($this->times);
+                }
+            }),
             'total_time' => $this->whenLoaded('times', function() {
                 $addTimesAction = resolve(AddTimesAction::class);
 
