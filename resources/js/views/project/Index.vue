@@ -102,7 +102,7 @@ export default defineComponent({
 
       const response = await http.delete(`/api/project/${projectId}`);
 
-      if(response.message) {
+      if(response?.message) {
         fetchProjects();
       }
     };

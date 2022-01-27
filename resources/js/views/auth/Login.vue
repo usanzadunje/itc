@@ -38,6 +38,7 @@
           <p>
             Not registered yet?
             <button
+                type="button"
                 class="text-primary-600 font-semibold"
                 @click="this.$router.replace({name:'register'})"
             >

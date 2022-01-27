@@ -1,5 +1,5 @@
 <template>
-  <AppNav/>
+  <AppNav cssClass="rounded-md"/>
   <div class="flex justify-center">
     <div class="container">
       <router-view/>

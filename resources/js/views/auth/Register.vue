@@ -41,7 +41,11 @@
         <div class="mt-8 font-medium">
           <p>
             Already have an account?
-            <button class="text-primary-600 font-semibold" @click="this.$router.replace({name:'login'})">
+            <button
+                type="button"
+                class="text-primary-600 font-semibold"
+                @click="this.$router.replace({name:'login'})"
+            >
               Sign in
             </button>
           </p>

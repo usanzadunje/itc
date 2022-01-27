@@ -1,5 +1,8 @@
 <template>
-  <div class="flex justify-between w-full p-6 bg-white rounded-md">
+  <div
+      class="flex justify-between w-full p-6 bg-white"
+      :class="cssClass"
+  >
     <div>
       <AppNavLink
           :to="{name:'welcome'}"
@@ -82,11 +85,15 @@ export default defineComponent({
     AppModal,
     ProjectStoreUpdateModal,
   },
+  props: {
+    cssClass: {
+      type: String,
+    },
+  },
   setup() {
     /* Composables */
     const { loggedIn, logout } = useUser();
     const { isOpen, openModal } = useModal();
-
 
     return {
       /* Component properties */
