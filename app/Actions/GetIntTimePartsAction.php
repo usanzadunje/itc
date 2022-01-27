@@ -18,10 +18,10 @@ class GetIntTimePartsAction
 
         $timeParts = explode(':', $time);
 
-        try{
-            $timeParts = array_map(fn($el) => (int)$el, $timeParts);
-        }catch(\Exception $ex){
+        if(count($timeParts) < 3) {
             $timeParts = [0, 0, 0];
+        }else {
+            $timeParts = array_map(fn($el) => (int)$el, $timeParts);
         }
 
         return $timeParts;

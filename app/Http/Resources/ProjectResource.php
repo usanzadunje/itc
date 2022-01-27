@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProjectResource extends JsonResource
 {
+
     /**
      * Transform the resource into an array.
      *
@@ -19,7 +20,7 @@ class ProjectResource extends JsonResource
             'name' => $this->name,
             'times' => TimeResource::collection($this->whenLoaded('times')),
             'total_time' => $this->whenLoaded('times', function() {
-                $addTimesAction = new AddTimesAction();
+                $addTimesAction = resolve(AddTimesAction::class);
 
                 return $addTimesAction->handle($this->times()->pluck('time_spent')->toArray());
             }),
