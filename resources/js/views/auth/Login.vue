@@ -6,6 +6,7 @@
             :required="true"
             label="Login"
             type="text"
+            :autofocus="true"
             v-model="http.email"
             :errors="http.errors.email"
             placeholder="web@domain.com"

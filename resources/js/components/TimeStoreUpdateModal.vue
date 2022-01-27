@@ -8,6 +8,7 @@
           :required="true"
           label="Project time"
           type="text"
+          :autofocus="true"
           v-model="http.time_spent"
           :errors="http.errors.time_spent"
           placeholder="Enter time spent..."

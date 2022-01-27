@@ -23,6 +23,8 @@ class Time implements Rule
      * @return bool
      */
     public function passes($attribute, $value) {
+        // Checking if user provided at least 3 number values corresponding to hours, minutes and seconds
+        // in any possible format
         preg_match_all('!\d+!', $value, $matches);
 
         return count($matches[0]) > 2;

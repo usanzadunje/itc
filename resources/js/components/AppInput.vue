@@ -52,6 +52,9 @@ export default defineComponent({
     required: {
       type: Boolean,
     },
+    autofocus: {
+      type: Boolean,
+    },
     errors: {
       type: Array,
     },
@@ -59,8 +62,12 @@ export default defineComponent({
       type: String,
     },
   },
+  mounted() {
+    if(this.autofocus) {
+      this.$refs.input.focus();
+    }
+  },
   setup() {
-
 
     return {};
   },

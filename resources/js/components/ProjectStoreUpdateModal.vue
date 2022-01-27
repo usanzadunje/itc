@@ -8,6 +8,7 @@
           :required="true"
           label="Project name"
           type="text"
+          :autofocus="true"
           v-model="http.name"
           :errors="http.errors.name"
           placeholder="Project name..."
