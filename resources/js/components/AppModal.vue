@@ -3,10 +3,11 @@
     <div
         v-if="isOpen"
         class="modal cursor-pointer"
-        @click="$emit('dismiss')"
+        @mousedown="$emit('dismiss')"
     >
       <div
           class="cursor-default"
+          @mousedown="$event.stopPropagation()"
           @click="$event.stopPropagation()"
       >
         <slot></slot>

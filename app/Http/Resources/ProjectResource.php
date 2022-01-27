@@ -22,7 +22,7 @@ class ProjectResource extends JsonResource
             'name' => $this->name,
             $requestsOnlyLatestTime ? 'time' : 'times' => $this->whenLoaded('times', function() use ($requestsOnlyLatestTime) {
                 if($requestsOnlyLatestTime) {
-                    return new TimeResource($this->times[0]);
+                    return new TimeResource(count($this->times) ? $this->times[0] : null);
                 }else {
                     return TimeResource::collection($this->times);
                 }
