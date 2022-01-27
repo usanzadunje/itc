@@ -90,7 +90,7 @@ export default defineComponent({
 
       if(response?.user) {
         setUser(response.user);
-        await router.replace({ name: 'welcome' });
+        await router.replace({ name: 'project.index' });
       }
     };
 

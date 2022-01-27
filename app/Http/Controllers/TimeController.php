@@ -9,11 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TimeController extends Controller
 {
-
-    public function index() {
-        //
-    }
-
     public function store(StoreTimeRequest $request) {
         //
     }
