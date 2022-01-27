@@ -157,6 +157,7 @@ return [
     |
     */
 
-    'attributes' => [],
-
+    'attributes' => [
+        'time_spent' => 'project time',
+    ],
 ];
