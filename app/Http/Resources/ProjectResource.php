@@ -18,6 +18,7 @@ class ProjectResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'time' => new TimeResource($this->whenLoaded('latestTime')),
             'times' => TimeResource::collection($this->whenLoaded('times')),
             'total_time' => $this->whenLoaded('times', function() {
                 $addTimesAction = resolve(AddTimesAction::class);

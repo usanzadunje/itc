@@ -30,6 +30,6 @@ class User extends Authenticatable
 
     public function projects(): HasMany {
         return $this->hasMany(Project::class)
-            ->orderByDesc('created_at');
+            ->latest();
     }
 }

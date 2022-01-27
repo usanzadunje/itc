@@ -16,7 +16,10 @@ class ProjectController extends Controller
     }
 
     public function index(): ResourceCollection {
-        $projects = auth()->user()->projects()->with('times')->get();
+        $projects = auth()->user()
+            ->projects()
+            ->with('latestTime')
+            ->get();
 
         return ProjectResource::collection($projects);
     }
