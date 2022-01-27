@@ -1,21 +1,20 @@
 <template>
-  <div>
-    <teleport to="body">
+  <teleport to="body">
+    <div
+        v-if="isOpen"
+        class="modal cursor-pointer"
+        @click="$emit('dismiss')"
+    >
       <div
-          v-if="isOpen"
-          class="modal cursor-pointer"
-          @click="$emit('dismiss')"
+          class="cursor-default"
+          @click="$event.stopPropagation()"
       >
-        <div
-            class="cursor-default"
-            @click="$event.stopPropagation()"
-        >
-          <slot></slot>
-        </div>
+        <slot></slot>
       </div>
-    </teleport>
-  </div>
+    </div>
+  </teleport>
 </template>
+
 <script>
 import { defineComponent } from 'vue';
 

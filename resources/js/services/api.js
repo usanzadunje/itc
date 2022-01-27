@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios  from "axios";
+import router from '@/router';
 
 // Creating axios instance
 export const http = axios.create({
@@ -10,8 +11,15 @@ export const http = axios.create({
     Add a response interceptors
 */
 // Interceptor which will activate if request was successful 2xx codes
-const onFulfilled = (response) => {
-    return response.data;
+const onFulfilled = async(response) => {
+    const responseData = response.data;
+
+    // Checking if backend tried to redirect user
+    // then redirect user to that route on frontend
+    if(responseData.redirect) {
+        await router.push({ name: responseData.redirect });
+    }
+    return responseData;
 };
 // Interceptor which will activate if request was not successful !2xx codes
 const onRejected = async(error) => {
