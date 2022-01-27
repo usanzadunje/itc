@@ -23,7 +23,7 @@ class UpdateTimeRequest extends FormRequest
      */
     public function rules() {
         return [
-            'time_spent' => ['required', 'string', 'max:30', new Time],
+            'time_spent' => ['required', 'string', 'max:50', new Time],
         ];
     }
 }
