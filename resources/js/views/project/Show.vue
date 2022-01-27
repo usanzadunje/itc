@@ -5,7 +5,7 @@
       <h1 class="text-4xl hover:text-primary-600">{{ project?.name }}</h1>
       <button
           class="bg-primary-600 text-white hover:bg-primary-900 px-6 py-2.5 rounded-xl font-medium"
-          @click="openModal(true)"
+          @click="storeTime"
       >
         Add Time
       </button>
@@ -50,6 +50,15 @@
         </div>
       </div>
     </div>
+    <AppModal
+        :is-open="isOpen"
+        @dismiss="openModal(false)"
+    >
+      <TimeStoreUpdateModal
+          :project="modalData"
+          @dismiss-modal="fetchProject();openModal(false)"
+      />
+    </AppModal>
   </div>
 </template>
 
@@ -57,11 +66,11 @@
 import { defineComponent, onMounted, ref } from 'vue';
 import { useRoute }                        from 'vue-router';
 
-import AppModal                from '@/components/AppModal.vue';
-import ProjectStoreUpdateModal from '@/components/ProjectStoreUpdateModal.vue';
+import AppModal             from '@/components/AppModal.vue';
+import TimeStoreUpdateModal from '@/components/TimeStoreUpdateModal.vue';
 
-import useHttp from '@/composables/useHttp';
-// import useModal from '@/composables/useModal';
+import useHttp  from '@/composables/useHttp';
+import useModal from '@/composables/useModal';
 
 import dayjs from 'dayjs';
 
@@ -69,7 +78,7 @@ export default defineComponent({
   name: 'project/Index',
   components: {
     AppModal,
-    ProjectStoreUpdateModal,
+    TimeStoreUpdateModal,
   },
   setup() {
     /* Globals */
@@ -80,16 +89,32 @@ export default defineComponent({
 
     /* Composables */
     const http = useHttp();
-    // const { isOpen, modalData, openModal } = useModal();
+    const { isOpen, modalData, openModal } = useModal();
 
     /* Event handlers */
     const fetchProject = async() => {
       project.value = await http.get(`/api/project/${route.params.project}`);
     };
+    const storeTime = async(event) => {
+      event.stopPropagation();
+
+      const projectData = {
+        id: project.value.id,
+        name: project.value.name,
+      };
+
+      openModal(true, projectData);
+    };
     const updateTime = async(event, time) => {
       event.stopPropagation();
 
-      openModal(true, time);
+      const projectData = {
+        id: project.value.id,
+        name: project.value.name,
+        time,
+      };
+
+      openModal(true, projectData);
     };
     const destroyTime = async(event, timeId) => {
       event.stopPropagation();
@@ -109,12 +134,13 @@ export default defineComponent({
     return {
       /* Component properties */
       project,
-      // isOpen,
-      // modalData,
+      isOpen,
+      modalData,
 
       /* Event handlers */
+      openModal,
       fetchProject,
-      // openModal,
+      storeTime,
       updateTime,
       destroyTime,
 
