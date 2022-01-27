@@ -54,14 +54,6 @@ const routes = [
                 Start protected routes
     ============================================= */
     {
-        path: "/test",
-        name: "test",
-        meta: {
-            middleware: [auth],
-        },
-        component: () => import( "@/views/Test.vue"),
-    },
-    {
         path: '/project',
         component: Layout,
         meta: { middleware: [auth] },

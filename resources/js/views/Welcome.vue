@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center h-screen">
-    <div class="flex flex-col justify-between h-full">
+    <div class="flex flex-col justify-between items-center h-full">
       <AppNav cssClass="rounded-full"/>
 
       <div>
@@ -8,10 +8,7 @@
         <AppLogo class="mt-12"/>
       </div>
 
-
-      <button class="ml-8 bg-blue-200" @click="this.$router.push({name: 'test'})">
-        GO TO TEST
-      </button>
+      <div></div>
     </div>
   </div>
 </template>
