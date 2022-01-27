@@ -24,6 +24,6 @@ Route::get('/auth/user', AuthController::class)->middleware(['auth:sanctum']);
 Route::apiResource('project', ProjectController::class)
     ->middleware(['auth:sanctum']);
 
-Route::apiResource('time', TimeController::class)
+Route::apiResource('project.time', TimeController::class)
     ->except('index', 'show')
     ->middleware(['auth:sanctum']);
