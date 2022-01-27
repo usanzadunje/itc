@@ -1,46 +1,73 @@
 import axios from "axios";
 
-// Creating axios instance for routes that are api protected
+// Creating axios instance
 export const http = axios.create({
     baseURL: import.meta.env.VITE_VUE_APP_URL,
     withCredentials: true,
 });
 
 /*
-    Add a response interceptor to handle errors
+    Add a response interceptors
 */
-http.interceptors.response.use(
-    (response) => {
-        return response.data;
-    },
-    function(error) {
-        const response = error.response;
-        // For Unauthenticated | Forbidden (Unauthorized) | CSRF (Session) Expired | Too many attempts
-        // just throw alert with status code and message
-        // Refactor to navigate to error page.
-        if(
-            response &&
-            [401, 403, 419, 429].includes(response.status)
-        ) {
-            // '/api/auth/user' route is for fetching authenticated user so we do not want to
-            // show any errors for this route because it is just checking whether there is an user
-            // and it triggers on every page load (App.vue setup hook)
-            if(error.response.config.url === '/api/auth/user') {
-                return;
-            }
+// Interceptor which will activate if request was successful 2xx codes
+const onFulfilled = (response) => {
+    return response.data;
+};
+// Interceptor which will activate if request was not successful !2xx codes
+const onRejected = async(error) => {
+    const response = error.response;
 
-            alert(`${response.status} | ${response.data.message}`);
+    // If there is error response handle it according to which error server responded with.
+    if(response) {
+        renderErrorPage(response);
+        await cleanValidationErrors(response);
+        await regenerateCSRF(response);
+    }
+
+    return Promise.reject(error);
+};
+
+/**
+ * Unauthenticated | Forbidden (Unauthorized) | Too many attempts
+ * just throw alert with status code and message
+ * Refactor to navigate to error page.
+ */
+const renderErrorPage = (response) => {
+    if([401, 403, 429].includes(response.status)) {
+        // '/api/auth/user' route is for fetching authenticated user so we do not want to
+        // show any errors for this route because it is just checking whether there is an user
+        // and it triggers on every page load (App.vue setup hook)
+        if(response.config.url === '/api/auth/user') {
             return;
-        }else if(
-            response &&
-            [422].includes(response.status)
-        ) {
-            // Validation errors
-            // Return only key (field name) => value (error message) pairs
-            // clearing response from axios
-            return Promise.reject(response.data?.errors);
         }
 
-        return Promise.reject(error);
-    },
-);
+        alert(`${response.status} | ${response.data.message}`);
+        return;
+    }
+};
+/**
+ * Validation errors
+ * Return only key (field name) => value (error message) pairs
+ * clearing response from axios
+ */
+const cleanValidationErrors = (response) => {
+    if(response.status == 422) {
+
+        return Promise.reject(response.data?.errors);
+    }
+};
+/**
+ * CSRF token mismatch
+ */
+const regenerateCSRF = async(response) => {
+    if(response.status == 419) {
+        // Regenerate csrf token
+        await http.get('/sanctum/csrf-cookie');
+
+        // Do same request again
+        return http(response.config);
+    }
+};
+
+http.interceptors.response.use(onFulfilled, onRejected);
+

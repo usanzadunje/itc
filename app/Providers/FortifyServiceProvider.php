@@ -13,7 +13,7 @@ use Laravel\Fortify\Fortify;
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
-     * Custom bindings for Fortify classes which will switch Fortify implmentation
+     * Custom bindings for Fortify classes which will switch Fortify implementation
      * with our own.
      *
      * @var array|string[]

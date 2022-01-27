@@ -85,7 +85,7 @@ export default defineComponent({
 
     /* Event handlers */
     const login = async() => {
-      await http.get('/sanctum/csrf-cookie');
+      // await http.get('/sanctum/csrf-cookie');
       const response = await http.post('/login');
 
       if(response?.user) {
