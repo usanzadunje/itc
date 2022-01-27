@@ -30,15 +30,6 @@ class AddTimesAction
             $this->seconds += $seconds;
         }
 
-        // Getting only seconds that are left when all minutes(when seconds exceed 60) are transferred to $minutes variable
-        $seconds = $this->seconds % 60;
-        // Adding all minutes plus the ones left from when seconds exceed 60
-        $minutes = $this->minutes + (int)($this->seconds / 60);
-        // Adding all hours plus the ones left from when minutes exceed 60
-        $hours = $this->hours + (int)($minutes / 60);
-        // Getting only minutes left after all hours from minutes(when minutes exceed 60) are transferred to $hours variable
-        $minutes = $minutes % 60;
-
-        return $this->prettyTimeAction->handle($hours, $minutes, $seconds);
+        return $this->prettyTimeAction->handle($this->hours, $this->minutes, $this->seconds);
     }
 }
