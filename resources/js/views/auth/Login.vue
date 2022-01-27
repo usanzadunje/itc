@@ -56,8 +56,8 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import { useRouter }       from 'vue-router';
+import { defineComponent, onMounted } from 'vue';
+import { useRouter }                  from 'vue-router';
 
 import AuthLayout       from '@/components/AuthLayout.vue';
 import AppInput         from '@/components/AppInput.vue';
@@ -83,6 +83,12 @@ export default defineComponent({
       email: 'admin@admin.com',
       password: 'password',
       remember: null,
+    });
+
+    /* Lifecycle hooks */
+    onMounted(() => {
+      http.email = 'admin@admin.com';
+      http.password = 'password';
     });
 
     /* Event handlers */
