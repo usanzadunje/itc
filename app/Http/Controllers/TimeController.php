@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TimeController extends Controller
 {
+    public function __construct() {
+        $this->authorizeResource(Time::class, 'time');
+    }
+
     public function store(StoreTimeRequest $request, Project $project): Response {
         $project->times()
             ->create($request->validated());
